@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ワンピースOP冒頭</title>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                document.getElementById("parent").style.top = "130%";
+
+                setTimeout(function() {
+                document.getElementById("parent").style.opacity = "0";
+                }, 4000);
+                setTimeout(function() {
+                document.getElementById("parent").style.display = "none";
+            }, 5000);
+            }, 500);
+        })
+    </script>
+
+    <style>
+        .position{
+            opacity: 1;
+            top: -201%;
+            transition: top 15s, opacity 1s;
+        }
+    </style>
+</head>
+<body style="background-color: black;">
+    <div style="position: relative; height: 100vh; width: 100vw; background-color: black;">
+        <div id="parent" class="position" style="position: absolute; height: 200vh; width: 20vw; background-color: black; left: 40%; top: -201%;">
+            <!-- <div style="position: absolute; width: 70vw; height: 70vw; top: 15%; left: 0%; border-radius: 50%; background-color: yellow; background: radial-gradient(at right top, white 30%, yellow); box-shadow: 1vw 0 30vw -1vw yellow, 0 1vw 30vw -1vw yellow, 0 -1vw 30vw -1vw yellow, -1vw 0 30vw -1vw yellow;"></div> -->
+            <!-- <div style="position: absolute; width: 2vw; height: 2vw; top: 15%; left: 40%; border-radius: 50%; background-color: yellow; background: radial-gradient(at right top, white 30%, yellow); box-shadow: 0.036vw 0 3vw yellow, 0 0.036vw 3vw yellow, 0 -0.036vw 3vw yellow, -0.036vw 0 3vw yellow;"></div> -->
+
+            <script>
+                const light_parent = document.getElementById("parent"); //光球を置く親要素
+
+                const light_num = 50; //光の数
+                const t_max = 97; // 光の最大高さ
+                const t_min = 0; 
+                const l_max = 87; //光の最大横位置
+                const l_min = 2;
+
+                for(let i = 0; i < light_num; i++){
+                    const light = document.createElement("div"); //新しい光の生成
+                    light.style.position = "absolute";
+                    light.style.width = "2vw";
+                    light.style.height = "2vw";
+                    light.style.borderRadius = "50%";
+                    light.style.background = "radial-gradient(at right top, white 30%, yellow)";
+                    light.style.boxShadow = "0.036vw 0 3vw yellow, 0 0.036vw 3vw yellow, 0 -0.036vw 3vw yellow, -0.036vw 0 3vw yellow";
+                    light.id = i;
+
+                    const left = Math.random() * (l_max - l_min) + l_min;
+                    const top = Math.random() * (t_max - t_min) + t_min;
+
+                    light.style.left = left + "%";
+                    light.style.top = top + "%";
+
+                    const scale = Math.random() * 0.1 + 0.5;
+                    light.style.transform = `scale(${scale})`;
+                    
+                    const animation_name = `resize_anime`;
+
+                    const style = document.styleSheets[0];
+                    style.insertRule(
+                        `@keyframes ${animation_name}{
+                            0% {transform: scale(${scale * 0.8});}
+                            50% {transform: scale(${scale * 0.2});}
+                            100% {transform: scale(${scale * 0.8});}
+                        }`, style.cssRules.length);
+
+                    light.style.animation = `${animation_name} 1s infinite`;
+                    
+                    light.style.animationDelay = Math.random() + "s";
+
+                    light_parent.appendChild(light);
+
+                }
+
+
+            </script>
+
+        </div>
+    </div>
+    
+</body>
+</html>
